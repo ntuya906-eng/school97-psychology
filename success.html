@@ -1,0 +1,25 @@
+{% extends 'base.html' %}
+{% block title %}Бүртгэл амжилттай{% endblock %}
+{% block content %}
+<div class="card success-card">
+    <img src="{{ url_for('static', filename='logo97.jpg') }}" alt="97-р сургуулийн лого" class="logo small-logo">
+    <h1>Бүртгэл амжилттай хийгдлээ.</h1>
+    <p class="subtitle center">Таны уулзалтын мэдээллийг зөвхөн та болон админ харах боломжтой.</p>
+
+    <div class="code-box">
+        <p>Таны шалгах код</p>
+        <div class="student-code">{{ student_code }}</div>
+        <small>Энэ кодоо хадгалж аваарай.</small>
+    </div>
+
+    <div class="info-box">
+        <p><strong>Утасны дугаар:</strong> {{ phone }}</p>
+        <p>Өөрийн код + утасны дугаараар “Миний цагийг шалгах” хэсэгт орж уулзалтын цагаа харна.</p>
+    </div>
+
+    <div class="action-row center">
+        <a class="secondary-btn" href="{{ url_for('check_registration') }}">Миний цагийг шалгах</a>
+        <a class="primary-btn link-btn" href="{{ url_for('index') }}">Шинэ бүртгэл</a>
+    </div>
+</div>
+{% endblock %}

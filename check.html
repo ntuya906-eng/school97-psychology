@@ -1,0 +1,56 @@
+{% extends 'base.html' %}
+{% block title %}Миний цагийг шалгах{% endblock %}
+{% block content %}
+<div class="card main-card compact">
+    <header class="hero small-gap">
+        <img src="{{ url_for('static', filename='logo97.jpg') }}" alt="97-р сургуулийн лого" class="logo small-logo">
+        <div>
+            <h1>Миний цагийг шалгах</h1>
+            <p class="subtitle">Код болон утасны дугаараа оруулж өөрийн бүртгэлийг харна.</p>
+        </div>
+    </header>
+
+    <nav class="top-links">
+        <a href="{{ url_for('index') }}">Бүртгэлийн хуудас</a>
+        <a href="{{ url_for('admin_login') }}">Админ нэвтрэх</a>
+    </nav>
+
+    {% with messages = get_flashed_messages(with_categories=true) %}
+        {% if messages %}
+            {% for category, message in messages %}
+                <div class="message {{ category }}">{{ message }}</div>
+            {% endfor %}
+        {% endif %}
+    {% endwith %}
+
+    <form method="POST" class="register-form narrower">
+        <div class="grid two-col">
+            <div class="field">
+                <label for="student_code">Шалгах код</label>
+                <input type="text" id="student_code" name="student_code" placeholder="Жишээ: PSY-A1B2C3" required>
+            </div>
+            <div class="field">
+                <label for="phone">Утасны дугаар</label>
+                <input type="text" id="phone" name="phone" placeholder="Жишээ: 99112233" required>
+            </div>
+        </div>
+        <button type="submit" class="primary-btn">Шалгах</button>
+    </form>
+
+    {% if registration %}
+    <section class="result-card">
+        <h3>Таны уулзалтын мэдээлэл</h3>
+        <div class="result-grid">
+            <p><strong>Овог нэр:</strong> {{ registration['last_name'] }} {{ registration['first_name'] }}</p>
+            <p><strong>Анги:</strong> {{ registration['grade_class'] }}</p>
+            <p><strong>Утас:</strong> {{ registration['phone'] }}</p>
+            <p><strong>Хандсан шалтгаан:</strong> {{ registration['reason'] }}</p>
+            <p><strong>Уулзалтын өдөр:</strong> {{ registration['appointment_date'] }}</p>
+            <p><strong>Уулзалтын цаг:</strong> {{ registration['appointment_time'] }}</p>
+            <p><strong>Төлөв:</strong> {{ registration['status'] }}</p>
+            <p><strong>Админы тэмдэглэл:</strong> {{ registration['admin_note'] or 'Тэмдэглэл байхгүй' }}</p>
+        </div>
+    </section>
+    {% endif %}
+</div>
+{% endblock %}

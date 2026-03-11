@@ -1,0 +1,38 @@
+{% extends 'base.html' %}
+{% block title %}Админ нэвтрэх{% endblock %}
+{% block content %}
+<div class="card main-card compact">
+    <header class="hero small-gap">
+        <img src="{{ url_for('static', filename='logo97.jpg') }}" alt="97-р сургуулийн лого" class="logo small-logo">
+        <div>
+            <h1>Админ нэвтрэх</h1>
+            <p class="subtitle">Зөвхөн сэтгэлзүйч, админ ажилтан нэвтрэнэ.</p>
+        </div>
+    </header>
+
+    <nav class="top-links">
+        <a href="{{ url_for('index') }}">Бүртгэлийн хуудас</a>
+        <a href="{{ url_for('check_registration') }}">Миний цагийг шалгах</a>
+    </nav>
+
+    {% with messages = get_flashed_messages(with_categories=true) %}
+        {% if messages %}
+            {% for category, message in messages %}
+                <div class="message {{ category }}">{{ message }}</div>
+            {% endfor %}
+        {% endif %}
+    {% endwith %}
+
+    <form method="POST" class="register-form narrower">
+        <div class="field">
+            <label for="username">Нэвтрэх нэр</label>
+            <input type="text" id="username" name="username" placeholder="admin" required>
+        </div>
+        <div class="field">
+            <label for="password">Нууц үг</label>
+            <input type="password" id="password" name="password" placeholder="Нууц үг" required>
+        </div>
+        <button type="submit" class="primary-btn">Нэвтрэх</button>
+    </form>
+</div>
+{% endblock %}

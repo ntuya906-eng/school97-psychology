@@ -1,0 +1,74 @@
+{% extends 'base.html' %}
+{% block title %}Админ самбар{% endblock %}
+{% block content %}
+<div class="card admin-card">
+    <header class="hero small-gap">
+        <img src="{{ url_for('static', filename='logo97.jpg') }}" alt="97-р сургуулийн лого" class="logo small-logo">
+        <div>
+            <h1>Админ самбар</h1>
+            <p class="subtitle">Бүртгэлүүдийг харах, өдөр цаг засах, төлөв шинэчлэх хэсэг</p>
+        </div>
+    </header>
+
+    <nav class="top-links">
+        <a href="{{ url_for('index') }}">Бүртгэлийн хуудас</a>
+        <a href="{{ url_for('check_registration') }}">Миний цагийг шалгах</a>
+        <a href="{{ url_for('admin_logout') }}">Гарах</a>
+    </nav>
+
+    {% with messages = get_flashed_messages(with_categories=true) %}
+        {% if messages %}
+            {% for category, message in messages %}
+                <div class="message {{ category }}">{{ message }}</div>
+            {% endfor %}
+        {% endif %}
+    {% endwith %}
+
+    <div class="admin-list">
+        {% if registrations %}
+            {% for item in registrations %}
+            <div class="admin-item">
+                <div class="admin-summary">
+                    <h3>{{ item['last_name'] }} {{ item['first_name'] }} <span>{{ item['student_code'] }}</span></h3>
+                    <p><strong>Анги:</strong> {{ item['grade_class'] }}</p>
+                    <p><strong>Утас:</strong> {{ item['phone'] }}</p>
+                    <p><strong>Шалтгаан:</strong> {{ item['reason'] }}</p>
+                    <p><strong>Бүртгүүлсэн:</strong> {{ item['created_at'] }}</p>
+                </div>
+                <form method="POST" class="admin-form">
+                    <input type="hidden" name="record_id" value="{{ item['id'] }}">
+                    <div class="grid two-col">
+                        <div class="field">
+                            <label>Уулзалтын өдөр</label>
+                            <input type="date" name="appointment_date" value="{{ item['appointment_date'] }}" required>
+                        </div>
+                        <div class="field">
+                            <label>Уулзалтын цаг</label>
+                            <input type="time" name="appointment_time" value="{{ item['appointment_time'] }}" required>
+                        </div>
+                    </div>
+                    <div class="grid two-col">
+                        <div class="field">
+                            <label>Төлөв</label>
+                            <select name="status">
+                                <option value="Хүлээгдэж байна" {% if item['status'] == 'Хүлээгдэж байна' %}selected{% endif %}>Хүлээгдэж байна</option>
+                                <option value="Баталгаажсан" {% if item['status'] == 'Баталгаажсан' %}selected{% endif %}>Баталгаажсан</option>
+                                <option value="Хойшлогдсон" {% if item['status'] == 'Хойшлогдсон' %}selected{% endif %}>Хойшлогдсон</option>
+                                <option value="Дууссан" {% if item['status'] == 'Дууссан' %}selected{% endif %}>Дууссан</option>
+                            </select>
+                        </div>
+                        <div class="field">
+                            <label>Админы тэмдэглэл</label>
+                            <input type="text" name="admin_note" value="{{ item['admin_note'] }}" placeholder="Тэмдэглэл оруулах">
+                        </div>
+                    </div>
+                    <button type="submit" class="primary-btn small-btn">Хадгалах</button>
+                </form>
+            </div>
+            {% endfor %}
+        {% else %}
+            <div class="empty-box">Одоогоор бүртгэл байхгүй байна.</div>
+        {% endif %}
+    </div>
+</div>
+{% endblock %}

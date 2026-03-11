@@ -1,0 +1,80 @@
+{% extends 'base.html' %}
+{% block title %}Сурагчийн сэтгэлзүйн бүртгэлийн хуудас{% endblock %}
+{% block content %}
+<div class="card main-card">
+    <header class="hero">
+        <img src="{{ url_for('static', filename='logo97.jpg') }}" alt="97-р сургуулийн лого" class="logo">
+        <div>
+            <h1>Нийслэлийн ерөнхий боловсролын<br>97 дугаар сургууль</h1>
+            <p class="subtitle">Сурагчийн сэтгэлзүйн бүртгэлийн хуудас</p>
+        </div>
+    </header>
+
+    <nav class="top-links">
+        <a href="{{ url_for('check_registration') }}">Миний цагийг шалгах</a>
+        <a href="{{ url_for('admin_login') }}">Админ нэвтрэх</a>
+    </nav>
+
+    {% with messages = get_flashed_messages(with_categories=true) %}
+        {% if messages %}
+            {% for category, message in messages %}
+                <div class="message {{ category }}">{{ message }}</div>
+            {% endfor %}
+        {% endif %}
+    {% endwith %}
+
+    <section class="example-box soft-yellow">
+        <h3>Бөглөх жишээ</h3>
+        <p><strong>Овог нэр:</strong> Батболд Нарантуяа</p>
+        <p><strong>Анги:</strong> 8А</p>
+        <p><strong>Утасны дугаар:</strong> 99112233</p>
+        <p><strong>Хандсан шалтгаан:</strong> Сэтгэлзүйн зөвлөгөө авах</p>
+        <p><strong>Уулзалтын өдөр:</strong> 2026-03-20</p>
+        <p><strong>Уулзалтын цаг:</strong> 15:30</p>
+    </section>
+
+    <section class="form-panel">
+        <form method="POST" class="register-form">
+            <div class="grid two-col">
+                <div class="field">
+                    <label for="last_name">Овог</label>
+                    <input type="text" id="last_name" name="last_name" placeholder="Жишээ: Батболд" required>
+                </div>
+                <div class="field">
+                    <label for="first_name">Нэр</label>
+                    <input type="text" id="first_name" name="first_name" placeholder="Жишээ: Нарантуяа" required>
+                </div>
+            </div>
+
+            <div class="grid two-col">
+                <div class="field">
+                    <label for="grade_class">Анги</label>
+                    <input type="text" id="grade_class" name="grade_class" placeholder="Жишээ: 8А" required>
+                </div>
+                <div class="field">
+                    <label for="phone">Утасны дугаар</label>
+                    <input type="text" id="phone" name="phone" placeholder="Жишээ: 99112233" maxlength="8" required>
+                </div>
+            </div>
+
+            <div class="grid two-col">
+                <div class="field">
+                    <label for="appointment_date">Уулзалтын өдөр</label>
+                    <input type="date" id="appointment_date" name="appointment_date" required>
+                </div>
+                <div class="field">
+                    <label for="appointment_time">Уулзалтын цаг</label>
+                    <input type="time" id="appointment_time" name="appointment_time" required>
+                </div>
+            </div>
+
+            <div class="field">
+                <label for="reason">Хандсан шалтгаан</label>
+                <textarea id="reason" name="reason" rows="4" placeholder="Жишээ: Сэтгэлзүйн зөвлөгөө авах" required></textarea>
+            </div>
+
+            <button type="submit" class="primary-btn">Бүртгэх</button>
+        </form>
+    </section>
+</div>
+{% endblock %}

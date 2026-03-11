@@ -1,0 +1,20 @@
+<!DOCTYPE html>
+<html lang="mn">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>{% block title %}97-р сургууль | Сэтгэлзүйн бүртгэл{% endblock %}</title>
+    <link rel="stylesheet" href="{{ url_for('static', filename='style.css') }}">
+</head>
+<body>
+    <div class="background-decor decor-cloud"></div>
+    <div class="background-decor decor-cloud small"></div>
+    <div class="background-decor decor-balloon one"></div>
+    <div class="background-decor decor-balloon two"></div>
+    <div class="background-decor decor-kite"></div>
+
+    <div class="page-shell">
+        {% block content %}{% endblock %}
+    </div>
+</body>
+</html>
