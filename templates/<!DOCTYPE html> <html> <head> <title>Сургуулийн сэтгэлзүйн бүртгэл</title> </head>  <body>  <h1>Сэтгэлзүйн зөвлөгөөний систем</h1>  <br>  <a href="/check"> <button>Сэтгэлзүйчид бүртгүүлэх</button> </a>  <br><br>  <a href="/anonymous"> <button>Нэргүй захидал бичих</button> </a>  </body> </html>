@@ -1,0 +1,22 @@
+<!DOCTYPE html>
+<html>
+<head>
+<title>Нэргүй захидал</title>
+</head>
+
+<body>
+
+<h2>Нэргүй захидал бичих</h2>
+
+<form method="POST">
+
+<textarea name="message" rows="6" cols="50" placeholder="Та асуудлаа энд бичнэ үү"></textarea>
+
+<br><br>
+
+<button type="submit">Илгээх</button>
+
+</form>
+
+</body>
+</html>
